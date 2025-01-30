@@ -38,9 +38,6 @@ def get_list_of_files(bucket_name):
     return files
 
 def upload_file(bucket_name, file_name):
-    """Send file to bucket."""
-    print("\n")
-    print("upload_file: "+bucket_name+"/"+file_name)
 
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(file_name)
@@ -50,9 +47,6 @@ def upload_file(bucket_name, file_name):
     return blob.public_url
 
 def download_file(bucket_name, file_name):
-    """ Retrieve an object from a bucket and saves locally"""  
-    print("\n")
-    print("download_file: "+bucket_name+"/"+file_name)
     bucket = storage_client.bucket(bucket_name)
 
     blob = bucket.blob(file_name)
