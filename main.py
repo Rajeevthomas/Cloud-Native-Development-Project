@@ -22,14 +22,6 @@ def index():
   </div>
 </form>"""    
 
-    bucket_files = set(get_list_of_files(bucket_name))
-    local_files =  set(list_files())
-    files_not_in_local = list(bucket_files - local_files)
-
-    if files_not_in_local:
-        for nfile in files_not_in_local: 
-            download_file(bucket_name, nfile)
-
     for file in list_files():
         index_html += "<li><a href=\"/files/" + file + "\">" + file + "</a></li>"
 
@@ -43,9 +35,7 @@ def upload():
     new_filename = f"{filename}_{timestamp}{ext}"  
     path = "files/" +  new_filename
     file.save(path)
-    public_url = upload_file(bucket_name, path)
-    obj = {"unique_file_name": new_filename,"orginal_file_name": file.filename, "local_path" : path, "public_url" : public_url,"timestamp": timestamp}
-    add_db_entry(obj)
+    upload_file(bucket_name, path)
     return redirect("/")
 
 @app.route('/files')
@@ -53,7 +43,7 @@ def list_files():
     files = os.listdir("./files")
     jpegs = []
     for file in files:
-        if file.lower().endswith(".jpeg") or file.lower().endswith(".jpg"):
+        if file.lower().endswith(".jpeg") or file.lower().endswith(".jpg") or file.lower().endswith(".json"):
             jpegs.append(file)
     
     return jpegs
