@@ -20,7 +20,7 @@ def upload_file(bucket_name, file_name):
 
     blob.upload_from_filename(file_name)
 
-    return blob.public_url
+    return
 
 def download_file(bucket_name, file_name):
     bucket = storage_client.bucket(bucket_name)
