@@ -1,8 +1,8 @@
 import os
 from flask import Flask, redirect, request, send_file
 from datetime import datetime
-
-from storage import add_db_entry, download_file, get_list_of_files, upload_file
+from gemini import model,upload_to_gemini,PROMPT
+from storage import download_file, get_list_of_files, upload_file
 
 os.makedirs('files', exist_ok = True)
 bucket_name = "cnd_uploads"
@@ -36,6 +36,7 @@ def upload():
     path = "files/" +  new_filename
     file.save(path)
     upload_file(bucket_name, path)
+    response = model.generate_content([upload_to_gemini(path, mime_type="image/jpeg"), "\n\n", PROMPT]).text
     return redirect("/")
 
 @app.route('/files')
