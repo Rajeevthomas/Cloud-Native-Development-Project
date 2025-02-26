@@ -1,31 +1,7 @@
 from google.cloud import datastore, storage
 import time
 
-datastore_client = datastore.Client()
 storage_client = storage.Client()
-
-def list_db_entries():
-    query = datastore_client.query(kind="photos")
-
-    for photo in query.fetch():
-        print(photo.items())
-
-def add_db_entry(object):
-    entity = datastore.Entity(key=datastore_client.key('photos'))
-    entity.update(object)
-
-    datastore_client.put(entity)
-
-
-def fetch_db_entry(object):
-
-    query = datastore_client.query(kind='photos')
-
-    for attr in object.keys():
-        query.add_filter(attr, "=", object[attr])
-
-    obj = list(query.fetch())
-    return obj
 
 def get_list_of_files(bucket_name):
     """Lists all the blobs in the bucket."""
