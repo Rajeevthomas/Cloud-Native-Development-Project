@@ -45,7 +45,7 @@ def upload():
     txt_filename_path = "files/" + f"{filename}_{timestamp}.txt"
     with open(txt_filename_path, 'w') as txt_file:
         txt_file.write(response) 
-
+    upload_file(bucket_name, txt_filename_path) 
     return redirect("/")
 
 @app.route('/files')
