@@ -39,9 +39,13 @@ def upload():
     upload_file(bucket_name, path)
     response = model.generate_content([upload_to_gemini(path, mime_type="image/jpeg"), "\n\n", PROMPT]).text
     response_data = json.loads(response)
-    json_filename_path =  "files/"  f"{filename}_{timestamp}" + ".json"   
-    with open(json_filename, 'w') as json_file:
-        json.dump(response, json_file)
+    #json_filename_path =  "files/"  f"{filename}_{timestamp}" + ".json"   
+    #with open(json_filename, 'w') as json_file:
+    #    json.dump(response, json_file)
+    txt_filename_path = "files/" + f"{filename}_{timestamp}.txt"
+    with open(txt_filename_path, 'w') as txt_file:
+        txt_file.write(response) 
+
     return redirect("/")
 
 @app.route('/files')
