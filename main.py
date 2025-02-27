@@ -44,7 +44,7 @@ def upload():
     upload_file(bucket_name, txt_filename_path) 
     response_data = json.loads(response)
     json_filename_path =  "files/"  f"{filename}_{timestamp}" + ".json"   
-    with open(json_filename, 'w') as json_file:
+    with open(json_filename_path, 'w') as json_file:
         json.dump(response, json_file)
     upload_file(bucket_name, json_filename_path)     
     return redirect("/")
