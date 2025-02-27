@@ -37,7 +37,7 @@ def upload():
     path = "files/" +  new_filename
     file.save(path)
     upload_file(bucket_name, path)
-    response = model.generate_content([upload_to_gemini(path, mime_type="image/jpeg"), "\n\n", PROMPT]).text.replace("```json", "").replace("```", "")
+    response = model.generate_content([upload_to_gemini(path, mime_type="image/jpeg"), "\n\n", PROMPT]).text.replace("```json", "").replace("```", "").replace("\n", "")
     response_data = json.loads(response)
     json_filename_path =  "files/"  f"{filename}_{timestamp}" + ".json"   
     with open(json_filename_path, 'w') as json_file:
