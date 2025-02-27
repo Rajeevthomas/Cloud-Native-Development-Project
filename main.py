@@ -2,6 +2,7 @@ import os
 from flask import Flask, redirect, request, send_file
 from datetime import datetime
 from gemini import model,upload_to_gemini,PROMPT
+import json
 from storage import download_file, get_list_of_files, upload_file
 
 os.makedirs('files', exist_ok = True)
