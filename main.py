@@ -20,6 +20,24 @@ def green_version():
     # You can switch to the green background version
     return render_template('green.html')
 
+@app.route('/')
+def index():
+    index_html="""
+<form method="post" enctype="multipart/form-data" action="/upload" method="post">
+  <div>
+    <label for="file">Choose file to upload</label>
+    <input type="file" id="file" name="form_file" accept="image/jpeg"/>
+  </div>
+  <div>
+    <button>Submit</button>
+  </div>
+</form>"""    
+
+    for file in list_files():
+        index_html += "<li><a href=\"/files/" + file + "\">" + file + "</a></li>"
+
+    return index_html
+
 @app.route('/upload', methods=["POST"])
 def upload():
     file = request.files['form_file']  
