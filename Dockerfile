@@ -1,10 +1,18 @@
-FROM python:3.10-slim
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
 
+# Set the working directory
 WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-COPY . .
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["python", "app.py"]
+# Expose port 8080 for Cloud Run
+EXPOSE 8080
+
+# Command to run your app
+CMD ["python", "main.py"]
+
