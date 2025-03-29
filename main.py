@@ -23,7 +23,7 @@ def index():
  </div>
 </form>"""
     for file in list_files():
-    index_html += "<li><a href=\"/files/" + file + "\">" + file + "</a></li>"
+        index_html += "<li><a href=\"/files/" + file + "\">" + file + "</a></li>"
     return index_html
 
 @app.route('/upload', methods=["POST"])
