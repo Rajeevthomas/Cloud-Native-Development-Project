@@ -12,13 +12,19 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # Decide which version to show (you can also add logic to split traffic, but here it's set to show blue by default)
-    return render_template('blue.html')  # For now, it returns blue version
-
-@app.route('/green')
-def green_version():
-    # You can switch to the green background version
-    return render_template('green.html')
+    index_html="""
+<form method="post" enctype="multipart/form-data" action="/upload" method="post">
+ <div>
+    <label for="file">Choose file to upload</label>
+    <input type="file" id="file" name="form_file" accept="image/jpeg"/>
+ </div>
+ <div>
+    <button>Submit</button>
+ </div>
+</form>"""
+    for file in list_files():
+    index_html += "<li><a href=\"/files/" + file + "\">" + file + "</a></li>"
+    return index_html
 
 @app.route('/upload', methods=["POST"])
 def upload():
@@ -52,5 +58,4 @@ def get_file(filename):
     return send_file('./files/' + filename)
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 8080))  # Default to port 8080
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)
