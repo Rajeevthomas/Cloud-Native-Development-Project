@@ -18,7 +18,7 @@ model = genai.GenerativeModel(
 PROMPT = """
 Describe the image in detail and generate a title and description for it. 
 Return the response as a JSON object in the following format:
-
+No special symbols
 {
    "title" : "PLACE THE GENERATED TITLE HERE",
    "description" : "PLACE THE GENERATED DESCRIPTION HERE"
