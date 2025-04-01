@@ -43,11 +43,13 @@ def list_files():
 @app.route('/files/<filename>')
 def get_file(filename):
     file_path = 'files/' + filename
-    title,description = download_files(file_path)
+    title,description = download_json(file_path)
     return render_template('file_details.html', title=title, description=description, filename=filename)
 
 @app.route('/images/<filename>')
 def get_image(filename):
+    file_path = 'files/' + filename
+    download_image(file_path)
     return send_from_directory('files', filename)
 
 if __name__ == '__main__':
