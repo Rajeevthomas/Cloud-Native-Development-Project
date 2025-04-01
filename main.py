@@ -3,7 +3,7 @@ from flask import Flask, redirect, request, send_from_directory, render_template
 from datetime import datetime
 from gemini import model, upload_to_gemini, PROMPT
 import json
-from storage import download_files, get_list_of_files, upload_file
+from storage import download_json,download_image, get_list_of_files, upload_file
 
 os.makedirs('files', exist_ok=True)
 
